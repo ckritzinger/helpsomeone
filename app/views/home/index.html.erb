@@ -1,0 +1,25 @@
+     <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Help Someone</h1>
+          <p class="lead">
+            Make a difference directly by providing the essentials to someone in need.
+          </p>
+          <p class="lead text-muted">
+            We cut out the middle man, so every rand you give goes directly to the recipient, 
+            and you can see exactly what it is spent on.
+          </p>
+          <p>
+            <a href="#" class="btn btn-primary my-2">Get in Touch</a>
+          </p>
+        </div>
+      </section>
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row">
+            <% @recipients.each do |recipient| %>
+              <%= render recipient %>
+            <% end %>
+          </div>
+        </div>
+      </div>
