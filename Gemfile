@@ -51,3 +51,4 @@ gem 'ckeditor'
 gem 'enumerize'
 gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
+gem "aws-sdk-s3", require: false
