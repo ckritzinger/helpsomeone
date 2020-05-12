@@ -1,19 +1,18 @@
 <div class="col-md-4">
   <div class="card mb-4 box-shadow">
-    <img class="card-img-top" src="<%= url_for(recipient.cover_photo) %>" alt="Card image cap">
+    <img class="card-img-top" src="<%= url_for(recipient.cover_photo.variant(resize_to_fill: [350, 350])) %>" alt="<%= recipient.name %>">
     <div class="card-body">
       <h3><%= recipient.name %></h3>
       <p class="card-text">
         <%= recipient.story %>
       </p>
       <div class="progress">
-        <div class="progress-bar bg-success" role="progressbar" style="width: <%= recipient.progress %>%" aria-valuenow="<%= recipient.progress %>" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-primary" role="progressbar" style="width: <%= recipient.progress %>%" aria-valuenow="<%= recipient.progress %>" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
-      <h4><%= recipient.progress %>% supported</h4>
+      <h4 class="py-3"><%= recipient.progress %>% supported</h4>
       <div class="d-flex justify-content-between align-items-center">
         <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-outline-secondary">View Detail</button>
-          <button type="button" class="btn btn-sm btn-outline-secondary">Help <%= recipient.name %></button>
+          <a href="mailto:help@helpsomebody.co.za?subject=<%= "Help #{recipient.name} (##{recipient.id})" %>" target="_blank" class="btn btn-primary">Help <%= recipient.name %></a>
         </div>
       </div>
     </div>

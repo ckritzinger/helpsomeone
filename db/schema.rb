@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_09_113445) do
+ActiveRecord::Schema.define(version: 2020_05_12_182214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,23 @@ ActiveRecord::Schema.define(version: 2020_05_09_113445) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "donors", force: :cascade do |t|
+    t.string "email"
+    t.string "phone_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "pledges", force: :cascade do |t|
+    t.bigint "donor_id", null: false
+    t.bigint "recipient_id", null: false
+    t.integer "weekly_amount_in_rands"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["donor_id"], name: "index_pledges_on_donor_id"
+    t.index ["recipient_id"], name: "index_pledges_on_recipient_id"
+  end
+
   create_table "recipients", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -46,4 +63,6 @@ ActiveRecord::Schema.define(version: 2020_05_09_113445) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "pledges", "donors"
+  add_foreign_key "pledges", "recipients"
 end
