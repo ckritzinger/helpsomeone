@@ -8,6 +8,6 @@ class Recipient < ApplicationRecord
   end
 
   def progress
-   (pledges.sum(:weekly_amount_in_rands) * 100.0 / 200)
+   (pledges.sum(:weekly_amount_in_rands) * 100.0 / 200).round
   end
 end
