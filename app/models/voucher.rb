@@ -1,3 +1,3 @@
 class Voucher < ApplicationRecord
-  belongs_to :recipient
+  belongs_to :recipient, optional: true
 end
