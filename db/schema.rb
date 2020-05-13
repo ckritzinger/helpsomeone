@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_182214) do
+ActiveRecord::Schema.define(version: 2020_05_13_183006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,23 @@ ActiveRecord::Schema.define(version: 2020_05_12_182214) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "expense_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "expenses", force: :cascade do |t|
+    t.bigint "voucher_id", null: false
+    t.integer "amount_in_cents"
+    t.string "description"
+    t.bigint "expense_category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["expense_category_id"], name: "index_expenses_on_expense_category_id"
+    t.index ["voucher_id"], name: "index_expenses_on_voucher_id"
+  end
+
   create_table "pledges", force: :cascade do |t|
     t.bigint "donor_id", null: false
     t.bigint "recipient_id", null: false
@@ -62,7 +79,20 @@ ActiveRecord::Schema.define(version: 2020_05_12_182214) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "vouchers", force: :cascade do |t|
+    t.bigint "recipient_id", null: false
+    t.integer "amount_in_rands"
+    t.string "code"
+    t.string "state"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recipient_id"], name: "index_vouchers_on_recipient_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "expenses", "expense_categories"
+  add_foreign_key "expenses", "vouchers"
   add_foreign_key "pledges", "donors"
   add_foreign_key "pledges", "recipients"
+  add_foreign_key "vouchers", "recipients"
 end
