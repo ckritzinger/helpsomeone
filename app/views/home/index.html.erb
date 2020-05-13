@@ -1,6 +1,6 @@
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-3">Make a difference in a life</h1>
+          <h1 class="display-3">Make a difference to another person</h1>
           <p>
             Donate R200 a week to directly help a person in need.
           </p>
@@ -13,13 +13,40 @@
           </p>
         </div>
       </div>
-
       <div class="container">
-        <h2>This is who you could help:</h2>
+        <div class=row>
+          <div class="col-lg-4">
+            <h3>
+              For R200 per week
+            </h3>
+            <p>
+              You can afford R200 a week, right? Because, let's face it, that isn't an amount of money that will make a huge difference to your life.
+              And you can't buy booze in the lockdown, so you've already saved that money.
+            </p>
+          </div>
+          <div class="col-lg-4">
+            <h3>
+              You can sustain a family.
+            </h3>
+            <p>
+              Your entire donation amount is given to the family in the form of vouchers they can redeem at the local supermarket.
+              Families need more than just food to thrive. We give people the ability to buy food, toiletries, airtime or electricity.
+            </p>
+          </div>
+          <div class="col-lg-4">
+            <h3>
+              With full transparency.
+            </h3>
+            <p>
+              We'll give you all the detail of how your money is spent. We collaborate with the supermarkets to account for every cent.
+              And our system means that we don't need to spend any of your money on logistics.
+            </p>
+          </div>
+        </div>
       </div>
-
       <div class="album py-5 bg-light">
         <div class="container">
+          <h2>Here are some of the people that need your help:</h2>
           <div class="row">
             <% @recipients.each do |recipient| %>
               <%= render recipient %>
