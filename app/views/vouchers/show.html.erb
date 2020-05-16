@@ -24,10 +24,14 @@
             <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
             <td><%= f.number_field(:amount, step: 0.01) %></td>
             <td><%= f.text_field(:description) %></td>
-            <td><%= f.collection_select(:expense_category_id, ExpenseCategory.all, :id, :name) %></td>
-            <td><%= f.submit("Add Expense") %></td>
+            <td><%= f.collection_select(:expense_category_id, ExpenseCategory.all, :id, :name,{},{class: 'custom-select'}) %></td>
+            <td><%= f.submit("Add Expense", class: "btn btn-primary") %></td>
           <% end %>
         </tr>
     </tbody>
   </table>
+  <%= form_with(model: @voucher, local: true) do |f| %>
+    <%= f.hidden_field(:state, value: 'tracked') %>
+    <%= f.submit("Mark Complete", class: "btn btn-danger") %>
+  <% end %>
 </div>

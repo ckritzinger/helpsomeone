@@ -8,6 +8,7 @@ class VouchersController < ApplicationController
 
   def index
     @vouchers = Voucher.all.order(updated_at: :desc)
+    @vouchers = @vouchers.where(state: params[:state]) if params[:state]
   end
 
   def show
@@ -21,9 +22,19 @@ class VouchersController < ApplicationController
     redirect_to @voucher
   end
 
+  def update
+    @voucher = Voucher.find(params[:id])
+    @voucher.update!(voucher_parameters)
+    redirect_to vouchers_path(state: @voucher.state)
+  end
+
   private
 
   def expense_parameters
     params.require(:expense).permit(:amount,:description,:expense_category_id)
+  end
+
+  def voucher_parameters
+    params.require(:voucher).permit(:state, :recipient_id)
   end
 end

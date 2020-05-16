@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'vouchers', to: 'vouchers#index'
   get 'voucher/:id', to: 'vouchers#show', as: :voucher
+  patch 'voucher/:id', to: 'vouchers#update', as: :voucher_update
   post 'voucher/:id', to: 'vouchers#add_expense', as: :create_expense
 
   root to: 'home#index'

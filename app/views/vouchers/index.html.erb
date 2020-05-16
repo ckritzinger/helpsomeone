@@ -1,12 +1,18 @@
 <div class="container">
   <h1>Vouchers</h1>
-  <table class="table table-striped">
+  <ul class="nav nav-pills">
+    <% Voucher::STATES.each do |state| %>
+    <li class="nav-item">
+      <a class="nav-link <%= params[:state] == state ? 'active' : ''%>" href="?state=<%= state %>"><%= state.titleize %></a>
+    </li>
+    <% end %>
+  </ul>
+  <table class="table table-striped mt-3">
     <thead>
       <tr>
         <th scope="col">Code</th>
         <th scope="col">Recipient</th>
         <th scope="col">Amount</th>
-        <th scope="col">State</th>
         <th></th>
       </tr>
     </thead>
@@ -14,10 +20,18 @@
       <% @vouchers.each do |voucher| %>
       <tr>
         <th scope="row"><%= voucher.code %></th>
-        <td><%= voucher.recipient.title %></td>
+        <td><%= voucher.recipient&.title %></td>
         <td><%= voucher.amount_in_rands %></td>
-        <td><%= voucher.state %></td>
-        <td><%= voucher.sent? ? link_to("Expenses", voucher) : button_to("Send")%></td>
+        <td>
+          <% if voucher.recipient.blank? %>
+            <%= form_with(model: voucher, local: true) do |f| %>
+              <%= f.collection_select(:recipient_id, Recipient.all, :id, :title) %>
+              <%= f.hidden_field(:state, value: 'allocated') %>
+              <%= f.submit("Allocate") %>
+            <% end %>
+          <% end %>
+          <%= button_to("Send") if voucher.state == 'allocated' %>
+          <%= link_to("Expenses", voucher) if voucher.state == 'sent' %>
       </tr>
       <% end %>
     </tbody>

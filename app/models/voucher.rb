@@ -12,11 +12,12 @@
 #
 
 class Voucher < ApplicationRecord
-  STATES = %w(created sent)
+  STATES = %w(created allocated sent tracked)
   belongs_to :recipient, optional: true
   validates :state, inclusion: { in: STATES }
   has_many :expenses
   before_save do
+    self.state ||= 'created'
     self.code ||= SecureRandom.base64(10)
       .upcase.gsub(/[^\w]/,'')
       .scan(/./).sample(6)
