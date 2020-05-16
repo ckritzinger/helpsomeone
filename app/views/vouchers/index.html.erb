@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Vouchers</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Code</th>
+        <th scope="col">Recipient</th>
+        <th scope="col">Amount</th>
+        <th scope="col">State</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @vouchers.each do |voucher| %>
+      <tr>
+        <th scope="row"><%= voucher.code %></th>
+        <td><%= voucher.recipient.title %></td>
+        <td><%= voucher.amount_in_rands %></td>
+        <td><%= voucher.state %></td>
+        <td><%= voucher.sent? ? link_to("Expenses", voucher) : button_to("Send")%></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

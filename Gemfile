@@ -41,6 +41,8 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'annotate'
+  gem 'faker'
+  gem 'pry'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -53,3 +55,4 @@ gem 'enumerize'
 gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
 gem "aws-sdk-s3", require: false
+gem 'kaminari'

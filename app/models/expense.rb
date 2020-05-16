@@ -14,4 +14,7 @@
 class Expense < ApplicationRecord
   belongs_to :voucher
   belongs_to :expense_category
+  def amount=(amount)
+    self.amount_in_cents = (amount.to_f*100).round
+  end
 end

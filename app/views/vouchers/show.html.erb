@@ -1,0 +1,33 @@
+<div class="container">
+  <%= link_to "Back to List", vouchers_path, class: 'float-right' %>
+  <h1>Voucher <%= @voucher.code %></h1>
+  <h2>Expenses</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Amount</th>
+        <th scope="col">Description</th>
+        <th scope="col">Category</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @voucher.expenses.each do |expense| %>
+        <tr>
+          <td>R<%= number_with_precision(0.01 * expense.amount_in_cents, precision: 2) %></td>
+          <td><%= expense.description %></td>
+          <td><%= expense.expense_category&.name %></td>
+        </tr>
+      <% end %>
+        <tr>
+          <%= form_with(model: @expense, url: '', local: true) do |f|  %>
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+            <td><%= f.number_field(:amount, step: 0.01) %></td>
+            <td><%= f.text_field(:description) %></td>
+            <td><%= f.collection_select(:expense_category_id, ExpenseCategory.all, :id, :name) %></td>
+            <td><%= f.submit("Add Expense") %></td>
+          <% end %>
+        </tr>
+    </tbody>
+  </table>
+</div>
