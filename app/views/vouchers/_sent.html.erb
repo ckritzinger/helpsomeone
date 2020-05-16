@@ -11,7 +11,7 @@
     <tbody>
       <% @voucher.expenses.each do |expense| %>
         <tr>
-          <td>R<%= number_with_precision(0.01 * expense.amount_in_cents, precision: 2) %></td>
+          <td><%= cents_to_rands(expense.amount_in_cents) %></td>
           <td><%= expense.description %></td>
           <td><%= expense.expense_category&.name %></td>
         </tr>
@@ -24,6 +24,14 @@
             <td><%= f.collection_select(:expense_category_id, ExpenseCategory.all, :id, :name,{},{class: 'custom-select'}) %></td>
             <td><%= f.submit("Add Expense", class: "btn btn-primary") %></td>
           <% end %>
+        </tr>
+        <tr>
+          <th><%= cents_to_rands(@voucher.expenses.sum(:amount_in_cents) || 0) %></th>
+          <td colspan=2>Total</td>
+        </tr>
+        <tr>
+          <th><%= cents_to_rands((@voucher.amount_in_rands * 100) - @voucher.expenses.sum(:amount_in_cents) || 0)%></th>
+          <td colspan=2>Unaccounted</td>
         </tr>
     </tbody>
   </table>
