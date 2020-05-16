@@ -11,6 +11,15 @@ class VouchersController < ApplicationController
     @vouchers = @vouchers.where(state: params[:state]) if params[:state]
   end
 
+  def send_message
+    @voucher = Voucher.find(params[:id])
+    @voucher.update!(message_params)
+    @voucher.send!
+    @voucher.update(state: 'sent')
+    flash[:notice] = "Sent SMS Message to #{@voucher.recipient.title}"
+    redirect_to vouchers_path(state: @voucher.state)
+  end
+
   def show
     @voucher = Voucher.find(params[:id])
     @expense = Expense.new
@@ -32,6 +41,10 @@ class VouchersController < ApplicationController
 
   def expense_parameters
     params.require(:expense).permit(:amount,:description,:expense_category_id)
+  end
+
+  def message_params
+    params.require(:voucher).permit(:state, :message)
   end
 
   def voucher_parameters

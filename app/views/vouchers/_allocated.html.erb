@@ -1,0 +1,23 @@
+  <p>
+    You're about to send the voucher via text message
+  </p>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <th>Voucher Code</th> <td><%= @voucher.code%></td>
+      </tr>
+      <tr>
+        <th>Recipient Name</th> <td><%= @voucher.recipient.title%></td>
+      </tr>
+      <tr>
+        <th>Recipient Number</th> <td><%= @voucher.recipient.phone_number%></td>
+      </tr>
+    </tbody>
+  </table>
+  <%= form_with(model: @voucher, local: true, url: send_message_path) do |f| %>
+    <div class="form-group">
+      <%= f.label(:message)%>
+      <%= f.text_area(:message, value: @voucher.default_message, class: 'form-control') %>
+    </div>
+    <%= f.submit("Send Message Now", class: "btn btn-danger") %>
+  <% end %>

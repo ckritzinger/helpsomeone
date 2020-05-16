@@ -28,4 +28,25 @@ class Voucher < ApplicationRecord
   def sent?
     self.state == 'sent'
   end
+
+  def send!
+    Twilio::REST::Client.new(
+      Rails.application.credentials.dig(:twilio, :account_sid),
+      Rails.application.credentials.dig(:twilio, :auth_token)
+    ).messages.create(
+      from: ENV.fetch('FROM_PHONE_NUMBER','+12073863936'),
+      to: recipient.phone_number.gsub(/^0/,'+27'),
+      body: message
+    )
+  end
+
+  def default_message
+    [
+      "Hello #{recipient.first_name} I hope you are well.",
+      "Here is a voucher that you can use at Kay's Minimarket.",
+      "They will give you R#{amount_in_rands} of goods for this voucher.",
+      "If you don't understand or you need help, you can ask Fatima to explain.",
+      "Your voucher number is: #{code}",
+    ].join(' ')
+  end
 end

@@ -30,8 +30,8 @@
               <%= f.submit("Allocate") %>
             <% end %>
           <% end %>
-          <%= button_to("Send") if voucher.state == 'allocated' %>
-          <%= link_to("Expenses", voucher) if voucher.state == 'sent' %>
+          <%= link_to("Send Message", voucher, class: 'btn btn-primary') if voucher.state == 'allocated' %>
+          <%= link_to("Track Expenses", voucher, class: 'btn btn-primary') if voucher.state == 'sent' %>
       </tr>
       <% end %>
     </tbody>
