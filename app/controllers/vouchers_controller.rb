@@ -11,6 +11,15 @@ class VouchersController < ApplicationController
     @vouchers = @vouchers.where(state: params[:state]) if params[:state]
   end
 
+  def create
+    quantity=params[:quantity].to_i
+    (1..quantity).map do
+      Voucher.create!(amount_in_rands: params[:amount_in_rands])
+    end
+    flash[:notice] = "Created #{quantity} vouchers"
+    redirect_to vouchers_path(state: 'created')
+  end
+
   def send_message
     @voucher = Voucher.find(params[:id])
     @voucher.update!(message_params)

@@ -16,7 +16,7 @@ class Voucher < ApplicationRecord
   belongs_to :recipient, optional: true
   validates :state, inclusion: { in: STATES }
   has_many :expenses
-  before_save do
+  before_validation do
     self.state ||= 'created'
     self.code ||= SecureRandom.base64(10)
       .upcase.gsub(/[^\w]/,'')

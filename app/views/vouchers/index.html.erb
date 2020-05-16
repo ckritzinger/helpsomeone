@@ -1,5 +1,23 @@
 <div class="container">
-  <h1>Vouchers</h1>
+  <div class="row">
+    <div class="col">
+      <h1>Vouchers</h1>
+    </div>
+    <div class="col-auto my-2">
+      <span>
+        <%= form_tag(voucher_create_path, class: 'form-inline right') do %>
+          <%= submit_tag 'Create', class: 'btn btn-primary' %>
+          <div class="form-group mx-3">
+            <%= number_field_tag :quantity, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= label_tag :amount_in_rands, 'vouchers for', class: 'mr-3' %>
+            R<%= number_field_tag :amount_in_rands, class: 'form-control' %>
+          </div>
+        <% end %>
+      <span>
+    </div>
+  </div>
   <ul class="nav nav-pills">
     <% Voucher::STATES.each do |state| %>
     <li class="nav-item">
