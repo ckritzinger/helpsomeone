@@ -12,7 +12,13 @@
       <h4 class="py-3"><%= recipient.progress %>% supported</h4>
       <div class="d-flex justify-content-between align-items-center">
         <div class="btn-group">
-          <a href="mailto:help@helpsomebody.co.za?subject=<%= "Help #{recipient.name} (##{recipient.id})" %>" target="_blank" class="btn btn-primary">Help <%= recipient.name %></a>
+         <%= mail_to(
+           'help@helpsomebody.co.za',
+           "Help #{recipient.name}",
+           subject: email_subject(recipient),
+           body: email_body(recipient),
+           class: 'btn btn-primary'
+          ) %>
         </div>
       </div>
     </div>

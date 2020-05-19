@@ -12,5 +12,16 @@
  *
  */
 
+ $primary:       #263468 !default;
+ $secondary:     #696B93 !default;
+ $success:       #5BA152 !default;
+ $info:          #6C3875 !default;
+ $warning:       #F6D04D !default;
+ $danger:        #AF3433 !default;
+ $light:         #C0BFCF !default;
+ $dark:          #454E7D !default;
+
+ $body-color: $dark;
+ $border-radius: .15rem !default;
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
