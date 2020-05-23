@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Help Somebody" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Help Somebody" %>">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= csrf_meta_tags %>
@@ -16,11 +17,8 @@
        <%= render 'layouts/messages' %>
        <%= yield %>
     </main>
-    <footer class="text-muted">
+    <footer class="text-light text-center bg-primary pb-3 pt-4">
       <div class="container">
-        <p class="float-right">
-          <a href="#">Back to top</a>
-        </p>
         <p>Help Somebody is a non-profit organisation dedicated to providing effective poverty alleviation.</p>
         <p><a href="mailto:hello@helpsomebody.co.za">Get in Touch</a></p>
       </div>

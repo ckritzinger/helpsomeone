@@ -1,15 +1,14 @@
-      <div class="jumbotron rounded-0" style="background-image: url(<%= image_path('bg.jpg') %>);">
+      <%= image_tag('bg.jpg', class: 'w-100') %>
+      <div class="jumbotron rounded-0 bg-primary pb-2 pt-4">
         <div class="container">
-          <h1 class="display-3">Make a real difference <br/> to another person.</h1>
+          <h1 class="display-3">Make a real difference to another person.</h1>
           <p>
-            Donate R200 a week to directly help a person in need.
-          </p>
-          <p>
-            Every rand you give goes directly to the recipient, 
+            Donate R200 a week to directly help a person in need. <br/>
+            Every rand goes directly to recipients, 
             and we track how it is spent, so that you can see first-hand how effective it is.
           </p>
           <p>
-            <a href="<%= about_path %>" class="btn btn-primary my-2">How it Works</a>
+            <a href="<%= about_path %>" class="btn btn-info my-2">How it Works</a>
           </p>
         </div>
       </div>
@@ -46,7 +45,7 @@
       </div>
       <div class="album py-5 bg-light">
         <div class="container">
-          <h2>Here are some people who need your help:</h2>
+          <h2 class="text-primary text-center w-100 pb-4">Here are some people who need your help:</h2>
           <div class="row">
             <% @recipients.each do |recipient| %>
               <%= render recipient %>
