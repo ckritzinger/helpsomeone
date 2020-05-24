@@ -1,0 +1,33 @@
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+$primary:       #263468 !default;
+$secondary:     #696B93 !default;
+$success:       #5BA152 !default;
+$info:          #D9572B !default;
+$warning:       #F6D04D !default;
+$danger:        #AF3433 !default;
+$light:         #EEEDF0 !default;
+$dark:          #454E7D !default;
+
+$body-color: $dark;
+$border-radius: .15rem !default;
+$font-family-sans-serif: 'Open Sans', sans-serif;
+
+@import '~bootstrap/scss/bootstrap';
+
+.jumbotron.bg-primary {
+  color: white;
+  h1 {
+    font-size: $h2-font-size;
+    font-weight: 400;
+  }
+}
+
+.nav-item.active > a.nav-link {
+  color: $info;
+}
+
+footer a {
+  color: $info;
+  font-weight: 700;
+}
+

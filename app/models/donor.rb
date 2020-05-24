@@ -10,6 +10,7 @@
 #
 
 class Donor < ApplicationRecord
+  validates :email, uniqueness: true
   def title
     email #for rails admin
   end

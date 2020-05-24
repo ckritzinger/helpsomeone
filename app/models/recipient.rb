@@ -24,6 +24,10 @@ class Recipient < ApplicationRecord
    (pledges.sum(:weekly_amount_in_rands) * 100.0 / 200).round
   end
 
+  def needs_funding?
+    progress < 100
+  end
+
   def title
     [first_name, last_name].join(' ')
   end
