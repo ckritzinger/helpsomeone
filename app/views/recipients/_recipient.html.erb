@@ -12,13 +12,55 @@
       <h4 class="py-3"><%= recipient.progress %>% supported</h4>
       <div class="d-flex justify-content-between align-items-center">
         <div class="btn-group">
-         <%= mail_to(
+         <%# mail_to(
            'help@helpsomebody.co.za',
            "Help #{recipient.name}",
            subject: email_subject(recipient),
            body: email_body(recipient),
            class: 'btn btn-info'
           ) %>
+        <% if recipient.needs_funding? %>
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-<%= recipient.id %>">
+            Help <%= recipient.name %>
+          </button>
+        <% end %>
+        </div>
+        <div class="modal fade" id="modal-<%= recipient.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Help <%= recipient.name %></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <%= form_with(model: Pledge.new, local: true) do |f| %>
+                  <%= f.hidden_field(:recipient_id, value: recipient.id) %>
+                  <%= f.fields_for :donor_attributes do |donor_form| %>
+                    <div class="form-group">
+                      <%= donor_form.label :email, 'Your Email Address' %>
+                      <%= donor_form.email_field :email, class: "form-control" %>
+                    </div>
+                    <p>
+                      We'll send you a welcome email with payment information, as well as details about 
+                      how you can track <%= recipient.name %>'s progress.
+                    </p>
+                  <% end %>
+                  <div class="form-group">
+                    <%= f.label :duration, "For how long do you aim to support #{recipient.name}?" %>
+                    <%= f.select :duration, durations, {}, class: "form-control" %>
+                  </div>
+                  <div class="alert alert-success text-small" role="alert">
+                      We won't hold you to this commitment, and you can change your mind at any time. 
+                      But understanding how long you want to commit for allows us to plan and help people more effectively.
+                  </div>
+                  <%= f.submit("Change #{recipient.name}'s life", class: "btn btn-primary") %>
+                <% end %>
+                <p></p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
