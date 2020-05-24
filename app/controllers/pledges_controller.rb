@@ -2,6 +2,7 @@ class PledgesController < ApplicationController
   def create
     @pledge = Pledge.new(pledge_parameters)
     @pledge.save!
+    PledgeMailer.with(pledge: @pledge).created.deliver_later
     redirect_to root_path
   end
 
