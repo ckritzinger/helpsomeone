@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_184610) do
+ActiveRecord::Schema.define(version: 2020_05_24_195811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_184610) do
     t.integer "weekly_amount_in_rands"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "end_date"
     t.index ["donor_id"], name: "index_pledges_on_donor_id"
     t.index ["recipient_id"], name: "index_pledges_on_recipient_id"
   end

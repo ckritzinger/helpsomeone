@@ -43,6 +43,8 @@ group :development do
   gem 'annotate'
   gem 'faker'
   gem 'pry'
+  gem 'pry-byebug'
+  gem 'letter_opener'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
