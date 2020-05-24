@@ -21,7 +21,7 @@ class Recipient < ApplicationRecord
   end
 
   def progress
-   (pledges.sum(:weekly_amount_in_rands) * 100.0 / 200).round
+   (pledges.sum(:weekly_amount_in_rands) * 100.0 / 250).round
   end
 
   def title

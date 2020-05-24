@@ -12,7 +12,7 @@ module ApplicationHelper
     Hello HelpSomebody
 
     I've decided that I want to help #{recipient.name} (##{recipient.id}),
-    by providing them with R200 per week to cover their most basic living needs.
+    by providing them with R250 per week to cover their most basic living needs.
 
     Please contact me to provide further information.
     MAIL
