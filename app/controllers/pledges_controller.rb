@@ -1,6 +1,7 @@
 class PledgesController < ApplicationController
   def create
-    @pledge = Pledge.create!(pledge_parameters)
+    @pledge = Pledge.new(pledge_parameters)
+    @pledge.save!
     redirect_to root_path
   end
 
@@ -10,6 +11,7 @@ class PledgesController < ApplicationController
     params.require(:pledge).permit(
       :recipient_id,
       :amount,
+      :duration,
       donor_attributes: [
         :email,
         :phone_number

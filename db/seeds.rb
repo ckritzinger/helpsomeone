@@ -25,13 +25,13 @@ pledges = (1..4).map do
   Pledge.create(
     donor: donors.sample,
     recipient: recipients.sample,
-    weekly_amount_in_rands: 200
+    weekly_amount_in_rands: Pledge::DEFAULT_PLEDGE_AMOUNT
   )
 end
 vouchers = (1..5).map do
   Voucher.create(
     recipient: recipients.sample,
-    amount_in_rands: 200,
+    amount_in_rands: Pledge::DEFAULT_PLEDGE_AMOUNT,
     state: Voucher::STATES.sample
   )
 end

@@ -8,6 +8,7 @@
 #  weekly_amount_in_rands :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  end_date               :datetime
 #
 
 class Pledge < ApplicationRecord
@@ -19,6 +20,9 @@ class Pledge < ApplicationRecord
     self.weekly_amount_in_rands ||= DEFAULT_PLEDGE_AMOUNT
   end
 
+  def duration=(duration)
+    self.end_date = duration.to_i.months.from_now
+  end
 
   private
 
