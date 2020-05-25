@@ -14,6 +14,27 @@ $font-family-sans-serif: 'Open Sans', sans-serif;
 
 @import '~bootstrap/scss/bootstrap';
 
+.center-headings {
+  h1, h2, h3, h4 {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.featurette {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  .featurette-heading {
+    font-weight: 600;
+    font-size: 2em;
+  }
+  .lead {
+    color: $info;
+    font-weight: 600;
+    font-size: 1em;
+  }
+}
+
 .jumbotron.bg-primary {
   color: white;
   h1 {

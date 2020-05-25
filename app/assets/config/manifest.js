@@ -1,5 +1,6 @@
  //= link helpsomeone.png
- //= link bg.jpg
+ //= link banner-home.jpg
+ //= link banner-about.jpg
  //= link find.png
  //= link help.png
  //= link understand.png
