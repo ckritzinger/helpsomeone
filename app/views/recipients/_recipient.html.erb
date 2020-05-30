@@ -35,8 +35,9 @@
                 </button>
               </div>
               <div class="modal-body">
-                <%= form_with(model: Pledge.new, local: true) do |f| %>
-                  <%= f.hidden_field(:recipient_id, value: recipient.id) %>
+                <div id="pledge-errors-for-<%= recipient.id %>" class="alert alert-danger d-none" role="alert"></div>
+                <%= form_with(model: recipient.pledges.new, id: "pledge-form-for-#{recipient.id}") do |f| %>
+                  <%= f.hidden_field(:recipient_id) %>
                   <%= f.fields_for :donor_attributes do |donor_form| %>
                     <div class="form-group">
                       <%= donor_form.label :email, 'Your Email Address' %>
@@ -50,6 +51,15 @@
                   <div class="form-group">
                     <%= f.label :duration, "For how long do you aim to support #{recipient.name}?" %>
                     <%= f.select :duration, durations, {}, class: "form-control" %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label :weekly_amount_in_rands, "How much do you want to give per week?" %>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">R</div>
+                      </div>
+                      <%= f.number_field :weekly_amount_in_rands, value:Pledge::DEFAULT_PLEDGE_AMOUNT, class: "form-control" %>
+                    </div>
                   </div>
                   <div class="alert alert-success text-small" role="alert">
                       We won't hold you to this commitment, and you can change your mind at any time. 

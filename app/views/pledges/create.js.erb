@@ -1,0 +1,2 @@
+$("#pledge-errors-for-<%= @pledge.recipient.id %>").addClass("d-none")
+$("#pledge-form-for-<%= @pledge.recipient.id %>").html("<%= j render(partial: 'thanks') %>");

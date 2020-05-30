@@ -1,9 +1,11 @@
 class PledgesController < ApplicationController
   def create
     @pledge = Pledge.new(pledge_parameters)
-    @pledge.save!
-    PledgeMailer.with(pledge: @pledge).created.deliver_later
-    redirect_to root_path
+    if @pledge.save
+      PledgeMailer.with(pledge: @pledge).created.deliver_later
+    else
+      render :error
+    end
   end
 
   private
@@ -11,7 +13,7 @@ class PledgesController < ApplicationController
   def pledge_parameters
     params.require(:pledge).permit(
       :recipient_id,
-      :amount,
+      :weekly_amount_in_rands,
       :duration,
       donor_attributes: [
         :email,

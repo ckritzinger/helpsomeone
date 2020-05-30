@@ -10,7 +10,7 @@
 #
 
 class Donor < ApplicationRecord
-  validates :email, uniqueness: true
+  validates :email, uniqueness: true, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   def title
     email #for rails admin
   end

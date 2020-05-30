@@ -1,0 +1,2 @@
+$("#pledge-errors-for-<%= @pledge.recipient.id %>").html("<%= j @pledge.errors.full_messages.to_sentence %>");
+$("#pledge-errors-for-<%= @pledge.recipient.id %>").removeClass("d-none")
