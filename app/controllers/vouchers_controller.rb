@@ -14,7 +14,7 @@ class VouchersController < ApplicationController
   def create
     quantity=params[:quantity].to_i
     (1..quantity).map do
-      Voucher.create!(amount_in_rands: params[:amount_in_rands])
+      Voucher.create!(amount_in_rands: params[:amount_in_rands], merchant_id: params[:merchant_id])
     end
     flash[:notice] = "Created #{quantity} vouchers"
     redirect_to vouchers_path(state: 'created')

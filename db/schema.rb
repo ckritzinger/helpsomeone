@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_24_195811) do
+ActiveRecord::Schema.define(version: 2020_06_13_194729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,12 @@ ActiveRecord::Schema.define(version: 2020_05_24_195811) do
     t.string "phone_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_donors_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_donors_on_reset_password_token", unique: true
   end
 
   create_table "expense_categories", force: :cascade do |t|
@@ -58,6 +64,12 @@ ActiveRecord::Schema.define(version: 2020_05_24_195811) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["expense_category_id"], name: "index_expenses_on_expense_category_id"
     t.index ["voucher_id"], name: "index_expenses_on_voucher_id"
+  end
+
+  create_table "merchants", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "pledges", force: :cascade do |t|
@@ -88,6 +100,8 @@ ActiveRecord::Schema.define(version: 2020_05_24_195811) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "message"
+    t.bigint "merchant_id"
+    t.index ["merchant_id"], name: "index_vouchers_on_merchant_id"
     t.index ["recipient_id"], name: "index_vouchers_on_recipient_id"
   end
 
@@ -96,5 +110,6 @@ ActiveRecord::Schema.define(version: 2020_05_24_195811) do
   add_foreign_key "expenses", "vouchers"
   add_foreign_key "pledges", "donors"
   add_foreign_key "pledges", "recipients"
+  add_foreign_key "vouchers", "merchants"
   add_foreign_key "vouchers", "recipients"
 end

@@ -14,6 +14,10 @@
             <%= label_tag :amount_in_rands, 'vouchers for', class: 'mr-3' %>
             R<%= number_field_tag :amount_in_rands, class: 'form-control' %>
           </div>
+          <div class="form-group">
+            <%= label_tag :merchant_id, ' at ', class: 'mx-3' %>
+            <%= select_tag :merchant_id, options_from_collection_for_select(Merchant.all, :id, :title), class: 'form-control' %>
+          </div>
         <% end %>
       <span>
     </div>
@@ -29,6 +33,7 @@
     <thead>
       <tr>
         <th scope="col">Code</th>
+        <th scope="col">Merchant</th>
         <th scope="col">Recipient</th>
         <th scope="col">Amount</th>
         <th></th>
@@ -38,6 +43,7 @@
       <% @vouchers.each do |voucher| %>
       <tr>
         <th scope="row"><%= voucher.code %></th>
+        <td><%= voucher.merchant&.title %></td>
         <td><%= voucher.recipient&.title %></td>
         <td><%= voucher.amount_in_rands %></td>
         <td>

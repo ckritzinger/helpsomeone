@@ -10,9 +10,14 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  message         :text
+#  merchant_id     :bigint
 #
 
 class Voucher < ApplicationRecord
+
+  belongs_to :merchant
+  belongs_to :recipient, optional: true
+
   STATES = %w(created allocated sent tracked)
   belongs_to :recipient, optional: true
   validates :state, inclusion: { in: STATES }
