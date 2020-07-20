@@ -35,3 +35,14 @@ vouchers = (1..5).map do
     state: Voucher::STATES.sample
   )
 end
+expense_categories = ['Food','Household','Sweets','Drugs','Other'].map{|n| ExpenseCategory.create!(name: n)}
+expenses = vouchers.map do |v|
+  (1..10).map do
+    Expense.create!(
+      expense_category: expense_categories.sample,
+      voucher: v,
+      amount_in_cents: (rand()*6000).round,
+      description: 'stuff'
+    )
+  end
+end.flatten

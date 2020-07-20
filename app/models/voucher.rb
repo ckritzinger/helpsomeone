@@ -31,6 +31,9 @@ class Voucher < ApplicationRecord
       .map{|x| x.join}.join('-')
   end
 
+  scope :sent, -> { where(state: ['sent','tracked']) }
+  scope :tracked, -> { where(state: ['tracked']) }
+
   def sent?
     self.state == 'sent'
   end

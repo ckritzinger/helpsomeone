@@ -59,3 +59,4 @@ gem 'jquery-rails'
 gem "aws-sdk-s3", require: false
 gem 'kaminari'
 gem 'twilio-ruby'
+gem "chartkick"

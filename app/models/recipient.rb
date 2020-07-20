@@ -15,6 +15,7 @@ class Recipient < ApplicationRecord
   has_one_attached :cover_photo
   has_many_attached :images
   has_many :pledges
+  has_many :vouchers
 
   def name
     first_name

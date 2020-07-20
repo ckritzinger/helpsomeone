@@ -1,0 +1,36 @@
+<div class="jumbotron rounded-0 bg-primary pb-2 pt-4">
+  <div class="container w-100 bg-primary text-light center-headings">
+    <h1 class="pt-4">Results</h1>
+    <!-- Three columns of text below the carousel -->
+    <div class="row py-4">
+      <div class="col-lg-4 px-4">
+        <h4>R <%= Voucher.tracked.sum(:amount_in_rands) %>.00</h4>
+        <p class="text-center">Donated</p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4 px-4">
+        <h4><%= Voucher.sent.count %></h4>
+        <p class="text-center">Vouchers sent</p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4 px-4">
+        <h4><%= Recipient.joins(:vouchers).merge(Voucher.sent).uniq.count %></h4>
+        <p class="text-center">Families helped</p>
+      </div>
+    </div>
+  </div>
+</div>
+<main role="main">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Spending Patterns</h2>
+        <p>
+          We track ever voucher spent down to the line item. Here is a summary of what our recipients are using their vouchers for.  
+        </p>
+      </div>
+      <div class="col-md-12">
+        <%= pie_chart Expense.joins(:expense_category).group(:name).sum('amount_in_cents/100'), responsive: true %>
+      </div>
+    </div>
+  </div><!-- /.container -->
+</main>
+<%= image_tag('banner-about.jpg', class: 'w-100') %>

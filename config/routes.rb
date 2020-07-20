@@ -1,6 +1,7 @@
 Rails.application.routes.draw do 
   root to: 'home#index'
   get 'about' => 'home#about', as: :about
+  get 'data' => 'home#data', as: :data
   post 'pledges' => "pledges#create", as: :pledges
 
   ## Admin routes
