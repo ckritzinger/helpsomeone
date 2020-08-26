@@ -49,7 +49,7 @@
         <td>
           <% if voucher.recipient.blank? %>
             <%= form_with(model: voucher, local: true) do |f| %>
-              <%= f.collection_select(:recipient_id, Recipient.all, :id, :title) %>
+              <%= f.collection_select(:recipient_id, Recipient.eligible_for_voucher, :id, :title) %>
               <%= f.hidden_field(:state, value: 'allocated') %>
               <%= f.submit("Allocate") %>
             <% end %>

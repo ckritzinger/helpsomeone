@@ -17,6 +17,10 @@ class Recipient < ApplicationRecord
   has_many :pledges
   has_many :vouchers
 
+  scope :eligible_for_voucher, -> {
+    where.not(id: Voucher.where.not(state: :tracked).pluck(:recipient_id)).joins(:pledges)
+  }
+
   def name
     first_name
   end
